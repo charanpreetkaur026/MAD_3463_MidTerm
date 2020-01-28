@@ -36,6 +36,8 @@ public class LibrarySystem {   //declaring java class
                 case 4:
                     findBookByTitle(bookTitles, copies, num);
                     break;
+                case 5:
+                    findBooksWithCopies(bookTitles, copies, num);
                 default:
                     // /terminate the system
                     System.out.println("You Entered the wrong choice. Please Choose from available options: ");
@@ -62,8 +64,9 @@ public class LibrarySystem {   //declaring java class
     public static int showMenu(){
         Scanner scanner = new Scanner(System.in);
         int choice;
-        System.out.println("-------***** Choose an option to proceed further ****----------\n");
-        System.out.println("1. Borrow a Book \n 2. Return a Book \n 3. Find Unavialable Books \n 4. Find book by Title\n  0. Terminate");
+        System.out.println("\n-------***** Choose an option to proceed further ****----------\n");
+        System.out.println(" 1. Borrow a Book \n 2. Return a Book \n 3. Find Unavialable Books"+
+                "\n 4. Find book by Title \n 5. Find Books having Less than 5 Copies \n  0. Terminate");
         choice = scanner.nextInt();
         return choice;
     }
@@ -125,6 +128,7 @@ public class LibrarySystem {   //declaring java class
 
        }
    }
+   //method to search book by title
    public static void findBookByTitle(String bookTitles[], int copies[], int size){
        Scanner scanner = new Scanner(System.in);
        System.out.println("Enter the title of the book to find: ");
@@ -138,18 +142,15 @@ public class LibrarySystem {   //declaring java class
            }
        }
    }
+   // method to find books having copies less than 5
     public static void findBooksWithCopies(String bookTitles[], int copies[], int size){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the title of the book to find: ");
-        String book;
-        book = scanner.next();
+        int book =0;
         for(int i=0; i<size; i++){
-            if(bookTitles[i].equalsIgnoreCase(book)){                       //finding requested book in array
-                System.out.println("You were searching for ' "+ bookTitles[i]+ " ' ");
-                System.out.println("Number of copies available is " + copies[i]);
-                //}
+            if(copies[i]<5){
+                book++;
             }
         }
+        System.out.println(book+ " have less than 5 copies");
     }
 
 } //end of class
