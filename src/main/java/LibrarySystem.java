@@ -12,7 +12,7 @@ public class LibrarySystem {
         for(int i=0; i<num; i++){
             System.out.println("Enter the title of the book: ");
             bookTitles[i] = scanner.next();
-            System.out.println("Enter the number of book " + bookTitles[i]);
+            System.out.println("Enter the number of book ' " + bookTitles[i] + " ' ");
             copies[i] = scanner.nextInt();
         }
         menuChoice = showMenu();
@@ -20,11 +20,14 @@ public class LibrarySystem {
             case 1:
                 // Borrow a book
                 borrowBook(bookTitles, copies, num);
+                break;
             case 2:
                 //Return a book
                 returnBook(bookTitles, copies, num);
+                break;
             default:
                 // /terminate the system
+                System.out.println("You Entered the wrong choice. Please Choose from available options: ");
 
     }
     }
@@ -45,16 +48,17 @@ public class LibrarySystem {
         String bookRquested;
         bookRquested = scanner.next();
         for(int i=0; i<size; i++){
-            if(bookTitles[i].equalsIgnoreCase(bookRquested)){
-                System.out.println("Number of copies available is " + copies[i]);
-                int n =  copies[i];
-                copies[i]=copies[i]-1;
-                System.out.println("You are borrowing " + bookTitles[i]);
-                System.out.println("Number of copies available is " + copies[i]);
+            if(bookTitles[i].equalsIgnoreCase(bookRquested)) {
+                if (!(copies[i] <= 0)) {
+                    System.out.println("Number of copies available was " + copies[i]);
+                    //int n =  copies[i];
+                    copies[i] = copies[i] - 1;
+                    System.out.println("You are borrowing " + bookTitles[i]);
+                    System.out.println("Number of copies available is " + copies[i]);
+                } else {
+                    System.out.println("Sorry!!! The requested book is not available");
+                }
             }
-//            else{
-//                System.out.println("The requested book is not available");
-//            }
         }
     }
     public static void returnBook(String bookTitles[], int copies[], int size){
@@ -67,15 +71,15 @@ public class LibrarySystem {
         returnedBook = scanner.next();
         for(int i=0; i<size; i++){
             if(bookTitles[i].equalsIgnoreCase(returnedBook)){
+
                 System.out.println("Number of copies available was " + copies[i]);
                 //int n =  copies[i];
                 copies[i]=copies[i]+1;
-                System.out.println("You are returning " + bookTitles[i]);
+                System.out.println( bookTitles[i]+ "book is returned");
                 System.out.println("Number of copies available is " + copies[i]);
+                //}
             }
-//            else{
-//                System.out.println("The requested book is not found");
-//            }
+
         }
     }
 
